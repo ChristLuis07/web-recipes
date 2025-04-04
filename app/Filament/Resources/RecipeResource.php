@@ -21,7 +21,7 @@ class RecipeResource extends Resource
 {
     protected static ?string $model = Recipe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-magnifying-glass';
 
     public static function form(Form $form): Form
     {
