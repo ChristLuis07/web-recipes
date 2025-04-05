@@ -77,6 +77,10 @@ class RecipeResource extends Resource
                 ->uploadingMessage('Uploading recipes...')
                 ->acceptedFileTypes(['application/pdf'])
                 ->required(),
+
+                Forms\Components\TextInput::make('rating')
+                ->required()
+                ->maxLength(255),
             ]);
     }
 

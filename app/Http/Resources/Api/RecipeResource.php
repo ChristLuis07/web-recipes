@@ -22,6 +22,7 @@ class RecipeResource extends JsonResource
             'url_video' => $this->url_video,
             'thumbnail' => $this->thumbnail,
             'about' => $this->about,
+            'rating' => $this->rating,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'recipe_ingredients' => RecipeIngredientResource::collection($this->whenLoaded('recipeIngredients')),
             'photos' => RecipePhotoResource::collection($this->whenLoaded('photos')),

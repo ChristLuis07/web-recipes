@@ -22,6 +22,7 @@ class Recipe extends Model
         'url_video',
         'category_id',
         'recipe_author_id',
+        'rating',
     ];
 
     public function setNameAttribute($value) {
