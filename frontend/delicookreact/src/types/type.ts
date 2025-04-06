@@ -12,6 +12,8 @@ export interface Recipe {
     recipe_ingredients: RecipeIngredient[],
     about: string,
     rating: number,
+    reviews: Review[],
+    
 }
 
 interface Photo {
@@ -48,4 +50,12 @@ export interface Category {
     icon: string,
     recipes_count: number,
     recipes: Recipe[],
+}
+
+export interface Review {
+    id: number,
+    comment: string,
+    rating: number,
+    author: Author,
+    created_at: string,
 }

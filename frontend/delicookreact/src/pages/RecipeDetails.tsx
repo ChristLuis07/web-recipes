@@ -3,6 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Recipe } from "../types/type";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/id";
+
+dayjs.extend(relativeTime);
+dayjs.locale("id");
 
 export default function RecipeDetails() {
 
@@ -333,167 +339,63 @@ export default function RecipeDetails() {
         </div>
       </div>
      )}
-     {activeTab === "reviews" && (
-      <div
-        className="px-5"
-        id="reviews"
-        role="tabpanel"
-        aria-labelledby="reviews-tab"
-      >
-        <div className="flex flex-col gap-5">
-          <div className="review-card flex flex-col pb-5 border-b border-[#E7E7E7] gap-3">
-            <p className="leading-8">
-              Hemat uang jadinya gaperlu beli burger di luar, udah bisa masak
-              sendiri hehehe
-            </p>
+     {activeTab === "reviews" && recipe && (
+  <div
+    className="px-5"
+    id="reviews"
+    role="tabpanel"
+    aria-labelledby="reviews-tab"
+  >
+    <div className="flex flex-col gap-5">
+      {Array.isArray(recipe.reviews) && recipe.reviews.length > 0 ? (
+        recipe.reviews.map((review, index) => (
+          <div
+            key={index}
+            className="review-card flex flex-col pb-5 border-b border-[#E7E7E7] gap-3"
+          >
+            <p className="leading-8">{review.comment}</p>
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="flex shrink-0 w-[50px] h-[50px] rounded-full overflow-hidden">
                   <img
-                    src="/assets/images/photos/photo-2.png"
+                    src={`${baseURL}/${review.author.photo}`}
                     className="w-full h-full object-cover"
                     alt="avatar"
                   />
                 </div>
                 <div className="flex flex-col gap-[2px]">
-                  <p className="font-semibold">Shayna</p>
+                  <p className="font-semibold">{review.author.name}</p>
                   <p className="text-sm leading-[21px] text-[#848486]">
-                    12 Days Ago
+                    {review.created_at
+                      ? dayjs(review.created_at).fromNow()
+                      : "Beberapa hari lalu"}
                   </p>
                 </div>
               </div>
               <div className="flex items-center">
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="review-card flex flex-col pb-5 border-b border-[#E7E7E7] gap-3">
-            <p className="leading-8">
-              Recipe paling enak menurut gue karena anak gak pernah bosan makan
-              ini terus setiap harinya, thank you banget ya shay...
-            </p>
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex shrink-0 w-[50px] h-[50px] rounded-full overflow-hidden">
+                {[...Array(5)].map((_, i) => (
                   <img
-                    src="/assets/images/photos/photo-3.png"
-                    className="w-full h-full object-cover"
-                    alt="avatar"
+                    key={i}
+                    src={
+                      i < review.rating
+                        ? "/assets/images/icons/Star 1.svg"
+                        : "/assets/images/icons/Star-grey.svg"
+                    }
+                    className="w-[18px] h-[18px]"
+                    alt="star"
                   />
-                </div>
-                <div className="flex flex-col gap-[2px]">
-                  <p className="font-semibold">ShSarina Dwinaayna</p>
-                  <p className="text-sm leading-[21px] text-[#848486]">
-                    12 Days Ago
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star-grey.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
+                ))}
               </div>
             </div>
           </div>
-          <div className="review-card flex flex-col pb-5 border-b border-[#E7E7E7] gap-3">
-            <p className="leading-8">
-              Hemat uang jadinya gaperlu beli burger di luar, udah bisa masak
-              sendiri hehehe
-            </p>
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex shrink-0 w-[50px] h-[50px] rounded-full overflow-hidden">
-                  <img
-                    src="/assets/images/photos/photo-4.png"
-                    className="w-full h-full object-cover"
-                    alt="avatar"
-                  />
-                </div>
-                <div className="flex flex-col gap-[2px]">
-                  <p className="font-semibold">Alqowy Putri</p>
-                  <p className="text-sm leading-[21px] text-[#848486]">
-                    12 Days Ago
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-                <img
-                  src="/assets/images/icons/Star 1.svg"
-                  className="w-[18px] h-[18px]"
-                  alt="star"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     )}
+        ))
+      ) : (
+        <p className="text-gray-500">Belum ada review.</p>
+      )}
+    </div>
+  </div>
+)}
+
     </div>
   </section>
   <div

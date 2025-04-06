@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Filament\Resources\RecipeResource\RelationManagers\TutorialsRelationManager;
+use App\Filament\Resources\ReviewRelationManagerResource\RelationManagers\ReviewsRelationManager;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use Filament\Forms;
@@ -134,6 +135,7 @@ class RecipeResource extends Resource
     {
         return [
             TutorialsRelationManager::class,
+            ReviewsRelationManager::class,
         ];
     }
 

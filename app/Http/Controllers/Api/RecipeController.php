@@ -28,6 +28,7 @@ class RecipeController extends Controller
             'author',
             'tutorials',
             'recipeIngredients.ingredient',
+            'reviews.author',
         ]);
 
         return new RecipeResource($recipe);

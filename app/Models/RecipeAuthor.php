@@ -20,4 +20,9 @@ class RecipeAuthor extends Model
     {
         return $this->hasMany(Recipe::class);
     }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'recipe_author_id');
+    }
 }
